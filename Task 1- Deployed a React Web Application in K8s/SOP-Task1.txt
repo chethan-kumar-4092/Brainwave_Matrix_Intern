@@ -48,3 +48,6 @@ Step11: Now We want to access our application from outside.
 	Now Just use kubectl port-forward to forward the traffic from 3000 port to 80 port on our pod.
 	  kubectl port-forward svc/todolistapp-service 3000:80 --address 0.0.0.0 &
 
+Step12: Check the K8s deployed server PublicIP:3000 
+	Successfully deployed React Web App 
+
