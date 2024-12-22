@@ -1,0 +1,50 @@
+TASK LIST FOR 1ST PHASE OF INTERNSHIP 
+
+Task Link - https://drive.google.com/file/d/1sP9dLJ5c7L7D2xPpmnw9tOaBydfoQcZa/view
+
+11- Cloud Computing Intern  (Task Assigned on Dec 17, 2024)
+Deploy a web application in AWS/Kubernetes
+First report submission in 12 Days 
+
+[Task Submitted on Dec 22, 2024] 
+
+SOP - Deployed a react web application in Kubernetes
+
+Step1: Connect to your AWS EC2 Ubuntu instance using SSH.
+	Update the instance packages.
+	sudo apt update
+
+Step2:Install Docker
+	sudo apt -y install docker.io
+
+Step3:Install Minikube and conntrack
+	  curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl && sudo mv ./kubectl /usr/local/bin/kubectl
+  curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/
+  apt install conntrack
+
+Step4:add ubuntu user to the docker group and creating New group called 'docker'
+	  sudo usermod -aG docker ubuntu && newgrp docker 
+
+Step5:Start Minikube
+	  minikube start --driver=docker
+
+Step6: Pulled Docker images from https://hub.docker.com/r/kubekode/react-todo-list-app
+	using Docker Pull Command -> docker pull kubekode/react-todo-list-app
+
+Step7: Deploy a pod with the react todolist app image
+ 	 kubectl run todolistapp --image=kubekode/react-todo-list-app
+
+Step8: Deploy a NodePort service for this pod.
+	  kubectl expose pod todolistapp --type=NodePort --port=80 --name=todolistapp-service
+
+Step9: Check service is working or not
+	minikube service todolistapp-service --url
+
+Step10: Request the URL using curl to check it's working or not.
+	  curl <URL>
+
+Step11: Now We want to access our application from outside.
+	Make sure we have enabled port 3000 for ingress traffic in AWS Instance security group.
+	Now Just use kubectl port-forward to forward the traffic from 3000 port to 80 port on our pod.
+	  kubectl port-forward svc/todolistapp-service 3000:80 --address 0.0.0.0 &
+
