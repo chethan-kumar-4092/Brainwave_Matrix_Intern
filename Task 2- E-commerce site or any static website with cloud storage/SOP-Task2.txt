@@ -1,0 +1,56 @@
+TASK LIST FOR 1ST PHASE OF INTERNSHIP 
+
+Task Link - https://drive.google.com/file/d/1iFyCSSKUosupo5NBH4g5AxGgaUJz0lTk/view?usp=sharing
+
+11- Cloud Computing Intern  (Task Assigned on Dec 22, 2024)
+E-commerce site or any static website with cloud storage
+
+[Task Submitted on Jan 09, 2024] 
+
+SOP - Deployed a static website with cloud storage
+
+Step1: Downloaded the css website files on the desktop
+	css website will get from google search 
+	free css website link: https://www.free-css.com/free-css-templates
+
+Step2: Extract the free css website files 
+
+Step3: Open AWS console and select 'S3' services [Simple Storage Service]
+
+Step4: Created a unique bucket name 'buckeyt01' 
+	created Bucket are shown in Image 'Bucket Name'
+
+Step5: While creating a bucket we need to make sure with below setting
+	* Object ownership: ACLs enabled
+	* Uncheck 'Block all public access'
+
+Step6: Enable S3 Static website hosting in properties
+	Amazon S3 > Buckets > buckeyt01 > Properties
+	Static website link: http://buckeyt01.s3-website.ap-south-1.amazonaws.com/
+
+Step7: Upload the files or folder in Objects
+	Amazon S3 > Buckets > buckeyt01 > Objects
+
+Step7: Select Bucket Policy
+	Amazon S3 > Buckets > buckeyt01 > Permissions > Edit bucket policy
+	
+	write a Bucket Policy by using AWS Policy Generator
+{
+  "Id": "Policy1736430942512",
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "Stmt1736430926510",
+      "Action": "s3:*",
+      "Effect": "Allow",
+      "Resource": "arn:aws:s3:::buckeyt01/index.html",
+      "Principal": "*"
+    }
+  ]
+}
+
+Step8: Check the static website URL in google 
+	http://buckeyt01.s3-website.ap-south-1.amazonaws.com/
+	
+	Results are shown in Image -> 'Deployed e-commerce site in aws s3'
+
